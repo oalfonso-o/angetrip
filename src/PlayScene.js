@@ -230,6 +230,15 @@ class PlayScene extends Phaser.Scene {
       this.gameOverScreen.setAlpha(0);
       this.anims.resumeAll();
     })
+    this.input.on('pointerdown', () => {
+      if (!this.dino.body.onFloor() || this.dino.body.velocity.x > 0) { return; }
+
+      this.jumpSound.play();
+      this.dino.body.height = 92;
+      this.dino.body.offset.y = 0;
+      this.dino.setVelocityY(-1600);
+      this.dino.setTexture('dino', 0);
+    })
 
     this.input.keyboard.on('keydown_SPACE', () => {
       if (!this.dino.body.onFloor() || this.dino.body.velocity.x > 0) { return; }
